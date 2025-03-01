@@ -69,6 +69,7 @@ document.addEventListener("DOMContentLoaded", function() {
         function addButton(page) {
             const button = document.createElement('button');
             button.setAttribute('cl-pagination', 'number');
+            button.classList.add('card-text-subtitle_pagination-number');
             button.textContent = page;
             button.classList.toggle('active', page === currentPage);
             button.addEventListener('click', function() {
@@ -81,6 +82,7 @@ document.addEventListener("DOMContentLoaded", function() {
         function addEllipsis() {
             const ellipsis = document.createElement('button');
             ellipsis.setAttribute('cl-pagination', 'number');
+            ellipsis.classList.add('card-text-subtitle_pagination-number'); //Change the class name with your preference
             ellipsis.textContent = '...';
             ellipsis.disabled = true;
             pagination.insertBefore(ellipsis, insertBeforeElement);
