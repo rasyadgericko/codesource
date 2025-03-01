@@ -1,16 +1,53 @@
+<!-- Pagination Script by Rasyad -->
+<style>
+.wf-design-mode [cl-pagination="list"] [cl-pagination="item"]:nth-child(n+13) {
+	display: none;
+}
+
+.wf-design-mode [cl-pagination="list"]:has([cl-pagination="item"]:nth-child(n+13)) ~ [cl-pagination="pagination"] {
+	display: flex;
+}
+
+[cl-pagination="prev"][style*="visibility: hidden"],
+[cl-pagination="next"][style*="visibility: hidden"] {
+	color: var(--colors--grey--grey-light-1000);
+  cursor: not-allowed;
+}
+
+[cl-pagination="number"][disabled] {
+	pointer-events: none;
+}
+
+[cl-pagination="list"] [cl-pagination="item"] {
+    opacity: 1;
+    transition: opacity 0.3s ease-in-out;
+}
+
+[cl-pagination="list"] [cl-pagination="item"].fade-out {
+    opacity: 0;
+}
+
+[cl-pagination="list"] [cl-pagination="item"].fade-in {
+    opacity: 1;
+}
+</style>
+
 <script>
 document.addEventListener("DOMContentLoaded", function() {
     const grid = document.querySelector('[cl-pagination="list"]');
     const cards = grid ? Array.from(grid.querySelectorAll('[cl-pagination="item"]')) : [];
     const pagination = document.querySelector('[cl-pagination="pagination"]');
 
-    let cardsPerPage = window.innerWidth < 768 ? 4 : 12;
+    const desktopCount = parseInt(grid.getAttribute('cl-pagination-desktop') || '12', 10);
+    const mobileCount = parseInt(grid.getAttribute('cl-pagination-mobile') || '4', 10);
+
+    let cardsPerPage = window.innerWidth < 768 ? mobileCount : desktopCount;
     let currentPage = 1;
     let totalPages = Math.ceil(cards.length / cardsPerPage);
     const fadeDuration = 300;
 
     function updateCardsPerPage() {
-        cardsPerPage = window.innerWidth < 768 ? 4 : 12;
+        cardsPerPage = window.innerWidth < 768 ? mobileCount : desktopCount;
         totalPages = Math.ceil(cards.length / cardsPerPage);
     }
 
@@ -82,7 +119,7 @@ document.addEventListener("DOMContentLoaded", function() {
         function addEllipsis() {
             const ellipsis = document.createElement('button');
             ellipsis.setAttribute('cl-pagination', 'number');
-            ellipsis.classList.add('card-text-subtitle_pagination-number'); //Change the class name with your preference
+            ellipsis.classList.add('card-text-subtitle_pagination-number');
             ellipsis.textContent = '...';
             ellipsis.disabled = true;
             pagination.insertBefore(ellipsis, insertBeforeElement);
