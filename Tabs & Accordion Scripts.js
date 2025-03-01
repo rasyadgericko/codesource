@@ -1,4 +1,4 @@
-<!-- [Attributes by Finsweet] Accordion -->
+<!-- [Attributes by Finsweet] Accordion (OPTIONAL)-->
 <script defer src="https://cdn.jsdelivr.net/npm/@finsweet/attributes-accordion@1/accordion.js"></script>
 
 <!-- Accordion Schema & Interaction Script -->
